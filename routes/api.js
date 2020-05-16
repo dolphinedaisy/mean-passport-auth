@@ -15,6 +15,7 @@ var router = express.Router();
 
 // -- register route
 router.post('/signup', function(req, res) {
+  // console.log(req.body);
   if (!req.body.email || !req.body.password || !req.body.name) {
     res.json({success: false, msg: 'Please pass name, email and password.'});
   } else {

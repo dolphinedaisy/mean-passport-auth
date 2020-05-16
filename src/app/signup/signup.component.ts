@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup() {
+    this.message = '';
     this.http.post('/api/signup',this.signupData).subscribe((resp: any) => {
       if(resp.success)
         this.router.navigate(['login']);
