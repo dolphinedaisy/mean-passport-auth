@@ -15,8 +15,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use('/', express.static(path.join(__dirname, 'dist')));
-app.use('/api', api);
+app.use('/', api);
 app.use(passport.initialize());
 
 mongoose.Promise = require('bluebird');
@@ -39,7 +38,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({ error: err }) // to resolve renderer error
+  res.json({ error: err, try:'1234', msg:'Not found call' }) // to resolve renderer error
 });
 
 module.exports = app;
