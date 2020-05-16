@@ -12,9 +12,23 @@ import { of } from 'rxjs/observable/of';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginData = { email:'', password:'' };
+  message = '';
+  data: any;
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  login() {
+    this.http.post('/api/signin',this.loginData).subscribe(resp => {
+      this.data = resp;
+      localStorage.setItem('jwtToken', this.data.token);
+      console.log('******* HOLA YOU GOT IT ********');
+    }, err => {
+      this.message = err.error.msg;
+    });
   }
 
 }
