@@ -6,9 +6,11 @@
     </div>
     <h2 class="form-signin-heading">Please sign in</h2>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" class="form-control mb-2" id="inputEmail" placeholder="Email address" [(ngModel)]="loginData.email" name="username" required/>
+    <input type="email" class="form-control mb-2" id="inputEmail" placeholder="Email address" [(ngModel)]="loginData.email" name="username" required #email="ngModel"/>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" class="form-control mb-2" id="inputPassword" placeholder="Password" [(ngModel)]="loginData.password" name="password" required/>
+    <input type="password" class="form-control mb-2" id="inputPassword" placeholder="Password" [(ngModel)]="loginData.password" name="password" required #password="ngModel"/>
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
     <div class="text-center">
       Not a member? <a [routerLink]="['/signup']">Signup here</a>

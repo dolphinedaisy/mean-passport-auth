@@ -14,7 +14,7 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  private onSignOut() {
+  public onSignOut() {
     localStorage.removeItem(KEY_ACCESSTOKEN);
     this.router.navigate(['/']);
   }

@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
 
   signupData = { name:'', email: '', password:'', confirmPassword: '' };
   message = '';
+  passwordMatched = true;
   constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -33,6 +34,10 @@ export class SignupComponent implements OnInit {
     }, err => {
       this.message = err.error.msg;
     });
+  }
+
+  onBlurConfirmPass() {
+    this.passwordMatched = this.signupData.password === this.signupData.confirmPassword
   }
 
 }

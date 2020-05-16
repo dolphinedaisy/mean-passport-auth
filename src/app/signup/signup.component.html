@@ -6,13 +6,45 @@
     </div>
     <h2 class="form-signin-heading">Sign Up Now</h2>
     <label for="inputName" class="sr-only">Email address</label>
-    <input type="text" class="form-control mb-2" id="inputName" placeholder="Name" [(ngModel)]="signupData.name" name="firstname" required/>
+    <input type="text"
+           class="form-control mb-2"
+           id="inputName"
+           placeholder="Name"
+           [(ngModel)]="signupData.name"
+           name="firstname"
+           required #fullname="ngModel"/>
+    <div [hidden]="fullname.valid || fullname.pristine" class="alert alert-danger">Name is required</div>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" class="form-control mb-2" id="inputEmail" placeholder="Email address" [(ngModel)]="signupData.email" name="email" required/>
+    <input type="email"
+           class="form-control mb-2"
+           id="inputEmail"
+           placeholder="Email address"
+           [(ngModel)]="signupData.email"
+           pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+           name="email"
+           required #email="ngModel"/>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>
+    <div *ngIf="email && email.errors && email.errors.pattern" class="alert alert-danger">Email is invalid</div>
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" class="form-control mb-2" id="inputPassword" placeholder="Password" [(ngModel)]="signupData.password" name="password" required/>
+    <input type="password"
+           class="form-control mb-2"
+           id="inputPassword"
+           placeholder="Password"
+           [(ngModel)]="signupData.password"
+           name="password"
+           required #password="ngModel"/>
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
     <label for="inputConfirmPassword" class="sr-only">Confirm Password</label>
-    <input type="password" class="form-control mb-2" id="inputConfirmPassword" placeholder="Confirm Password" [(ngModel)]="signupData.confirmPassword" name="confirmPassword" required/>
+    <input type="password"
+           class="form-control mb-2"
+           id="inputConfirmPassword"
+           placeholder="Confirm Password"
+           [(ngModel)]="signupData.confirmPassword"
+           (blur)="onBlurConfirmPass()"
+           name="confirmPassword"
+           required #confirm="ngModel"/>
+    <div [hidden]="confirm.valid || confirm.pristine" class="alert alert-danger">Confirm password is require</div>
+    <div *ngIf="!passwordMatched" class="alert alert-danger">Password does noot match</div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.form.valid">Sign Up</button>
     <div class="text-center">
       Already have an account? <a [routerLink]="'/login'">Sign in</a>
