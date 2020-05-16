@@ -4,14 +4,14 @@ var passport = require('passport');
 var config = require('../config/database');
 require('../config/passport')(passport);
 var jwt = require('jsonwebtoken');
-var User = require("../models/user");
+var User = require("../models/User");
 
 var router = express.Router();
 
 /* GET home page. */
-router.get('/profile', function(req, res, next) {
+/*router.get('/profile', function(req, res, next) {
   res.send('Express RESTful API');
-});
+});*/
 
 // -- register route
 router.post('/signup', function(req, res) {
@@ -55,6 +55,17 @@ router.post('/signin', function(req, res) {
       });
     }
   });
+});
+
+// -- profile route accessible to authorized user only
+router.get('/profile', passport.authenticate('jwt', { session: false }), function(req, res) {
+  var token = getToken(req.headers);
+  if (token) {
+    console.log(req.body);
+    res.json({success: true, msg: 'Successful call.'});
+  } else {
+    return res.status(403).send({success: false, msg: 'Unauthorized.'});
+  }
 });
 
 module.exports = router;
