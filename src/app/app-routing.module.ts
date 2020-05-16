@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { AuthGuardService } from "./services/auth-guard.service";
 
 
 const appRoutes: Routes = [
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   {
     path: 'welcome',
     component: ProfileComponent,
-    data: { title: 'Welcome' }
+    data: { title: 'Welcome' },
+    canActivate: [ AuthGuardService ]
   },
   {
     path: 'signup',

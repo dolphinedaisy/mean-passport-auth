@@ -9,6 +9,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuardService } from "./services/auth-guard.service";
+import { AuthService } from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,10 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
