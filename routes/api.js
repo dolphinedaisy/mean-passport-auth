@@ -8,14 +8,8 @@ var User = require("../models/User");
 
 var router = express.Router();
 
-/* GET home page. */
-/*router.get('/profile', function(req, res, next) {
-  res.send('Express RESTful API');
-});*/
-
 // -- register route
 router.post('/signup', function(req, res) {
-  // console.log(req.body);
   if (!req.body.email || !req.body.password || !req.body.name) {
     res.json({success: false, msg: 'Please pass name, email and password.'});
   } else {
@@ -63,7 +57,6 @@ router.post('/signin', function(req, res) {
 router.get('/profile', passport.authenticate('jwt', { session: false }), function(req, res) {
   var token = getToken(req.headers);
   if (token) {
-    console.log(req.body);
     res.json({success: true, msg: 'Successful call.'});
   } else {
     return res.status(403).send({success: false, msg: 'Unauthorized.'});

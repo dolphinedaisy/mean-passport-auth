@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
-import { Observable } from 'rxjs/Observable';
-import { tap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
 import { KEY_ACCESSTOKEN } from "../constants/const";
 import { AuthService } from "../services/auth.service";
 
@@ -32,7 +29,6 @@ export class LoginComponent implements OnInit {
       if(this.data && this.data.token) {
         localStorage.setItem(KEY_ACCESSTOKEN, this.data.token);
         this.router.navigate(['welcome']);
-        console.log('******* HOLA YOU GOT IT ********');
       } else {
         this.message = 'Some error occurred. Please try again';
       }
