@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { KEY_ACCESSTOKEN } from "../constants/const";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,12 @@ export class LoginComponent implements OnInit {
   message = '';
   data: any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
+    if(this.auth.isAuthenticated()) {
+      this.router.navigate(['welcome']);
+    }
   }
 
   login() {

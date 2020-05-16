@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: 'app-signup',
@@ -14,9 +15,12 @@ export class SignupComponent implements OnInit {
 
   signupData = { name:'', email: '', password:'', confirmPassword: '' };
   message = '';
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
+    if(this.auth.isAuthenticated()) {
+      this.router.navigate(['welcome']);
+    }
   }
 
   signup() {

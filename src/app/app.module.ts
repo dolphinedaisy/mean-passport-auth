@@ -11,13 +11,15 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuardService } from "./services/auth-guard.service";
 import { AuthService } from "./services/auth.service";
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ProfileComponent
+    ProfileComponent,
+    NavigationBarComponent
   ],
   imports: [
     CommonModule,
