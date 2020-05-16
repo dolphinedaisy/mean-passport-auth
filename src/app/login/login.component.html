@@ -10,8 +10,8 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" class="form-control mb-2" id="inputPassword" placeholder="Password" [(ngModel)]="loginData.password" name="password" required/>
     <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.form.valid">Sign in</button>
-    <p>
+    <div class="text-center">
       Not a member? <a [routerLink]="['/signup']">Signup here</a>
-    </p>
+    </div>
   </form>
 </div>
