@@ -3,6 +3,10 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var config = require('./config/database');
 
 var api = require('./routes/api');
 var app = express();
@@ -13,6 +17,12 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/', express.static(path.join(__dirname, 'dist')));
 app.use('/api', api);
+app.use(passport.initialize());
+
+mongoose.Promise = require('bluebird');
+mongoose.connect(config.database, { promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('********** DBconnection succesful **********'))
+  .catch((err) => console.error(err));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
